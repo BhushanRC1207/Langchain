@@ -1,0 +1,512 @@
+# What is GenAI
+- Generative AI is a type of artificial intelligence that creates new content such as text, images, music or code by learning patterns from existing data, mimicking human creativity.
+
+- AI <- ML <- DL <- GenAI
+
+# GenAI Impact Areas
+
+- Customer Support
+- Content Creation
+- Education
+- Software Development
+
+
+# Foundation Models (LLM, LMS)
+- A foundation model is a large-scale AI model trained on vast, typically unlabeled, data sets using self-supervision, designed to be adapted (fine-tuned) for a wide range of downstream tasks.
+
+
+# foundation models
+
+- user perspective (prompt engg, RAG, AI Agents, vector databases, fine tuning).
+- builder perspective (reinforcement learning with help of human feedback, pretraining, quantization, fine tuning).
+
+
+### Langchain
+
+# what is langchain
+- Langchain is an open source framework that helps in building LLM based applications. it provides modular components and end-to-end tools that help developers build complex AI applications, such as chatbots, question-answering systems, retrieval-augmented-generation, autonomous agents and more.
+
+# features
+- support all the major LLMs.
+- simplifies developing LLM based applications.
+- integrations available for all major tools.
+- open source/free/actively developed.
+- supports all major GenAI use cases.
+
+
+# Langchain Roadmap
+
+1. Fundamentals
+- what is langchain
+- langchain components
+- models
+- prompts
+- parsing output
+- runnables & LCEL
+- chains
+- memory
+
+2. RAG
+- document loaders
+- text splitters 
+- embeddings
+- vector stores
+- retrieves
+- building a RAG applications
+
+3. Agents
+- tools & toolkits
+- tool calling
+- building an AI agents
+
+
+# Benefits
+* concept of chains
+* model agnostic development
+* complete ecosystem
+* memory and state handling
+
+
+# what can we build?
+* conversational chatbots
+* AI Knowledge assistants
+* AI Agents
+* workflow automation
+* summarization/research helpers
+
+## Langchain Components
+
+* Models
+- models are core interfaces through which you can interact with AI models.
+- natural language understanding \& context aware text generation.
+- by using langchain we can communicate with two types of models ***language \& embedding.***
+
+* Prompts
+- input given to the large language models.
+- dynamic \& reusable prompts
+- role based prompts
+- few shot prompting 
+
+* Chains
+- a structured sequence of modular components such as prompts, language models and external tools-linked together to automate complex, multi step workflows.
+- parallel chains
+- condition based chains 
+
+* Memory
+- LLM API calls are stateless.
+- ConversationBufferMemory: stores a transcript of recent messages. great for short chats but can grow large quickly.
+- ConversationBufferWindowMemory: only keeps the last N interactions to avoid excessive token usage.
+- Summarizer-Based Memory: periodically summarizes older chat segments to keep a condensed memory footprint.
+- Custom Memory: for advanced use cases, we can store specialized state in a custom memory class.
+
+* Indexes
+- Indexes connect your application to external knowledge such as PDF, website or databases.
+- This is a combination of Doc loader, Text splitter, Vector store, Retrievals.
+
+* Agents
+- An Agent is a system that uses a large language model as a reasoning engine to determine which actions to take and in what order. 
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Models
+
+# What are Models?
+- The model component in langchain is a crucial part of the framework, designed to facilitate interactions with various `language models` and `embedding models`.
+- It abstracts the complexity of working directly with different LLMs, chat models amd embedding models, providing a uniform interface to communicate with them. This makes it easier to build applications that rely on AI-generated text, text embeddings for similarity search, and retrieval-augmented generation.
+
+# language models
+    - closed source 
+        - openai
+        - gemini
+        - claude
+    - open source
+        - huggingface
+
+# embedding models
+    - closed source
+        - openai
+    - open source
+        - huggingface
+
+
+## Language Models
+- language models are AI systems designed to process, generate and understand natural language text.
+
+- Types of language models 
+    - LLMs (general purpose tasks)
+    - chat models (conversation tasks)
+
+### LLMs
+- General purpose models that is used for raw text generation. They take a string or plain text as input and returns a string. These are traditionally older models and are not used much more.
+
+### Chat Models
+- Language models that are specialized for conversational tasks. They take a sequence of messages as inputs and returns chat messages as outputs. These are traditionally newer models and used more in comparison to LLMs.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Setup
+-  create a new folder
+- open it in vs code
+- create a new virtual environment
+    python -m venv venv
+- activate virtual environment
+    venv\Scripts\activate
+- create requirements.txt
+- install packages from requirements.txt
+    pip install -r requirements.txt
+- verify langchain installations.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Temperature
+- Temperature is a parameter that controls the randomness of a language model output. it affects how creative or deterministic the response are.
+- lower values (0.0 to 0.3) -> more deterministic and predictable.
+- higher values (0.7 to 1.5) -> more random, creative & diverse.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Open Source Models
+- Open source language models are freely available AI models that can be downloaded, modified, fine-tuned and deployed without restrictions from central provider.
+
+# HuggingFace - The largest repository of open-source LLMs.
+
+# Ways to use Open-Source Models
+- using huggingface inference API
+- running locally
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Prompts
+
+# What are prompts?
+- Prompts are the input instructions or queries given to a model to guide its output.
+
+# Types of Prompts:
+    - static
+    - dynamic
+
+# Static:
+- A static prompt is a fixed prompt where the text remains constant every time the model is called.
+    - No variables or placeholders are used.
+    - The same instruction is sent to the LLM for every request.
+    - Useful for simple tasks where the prompt never changes.
+
+# Dynamic:
+- A dynamic prompt contains variables/placeholders that get replaced with user input or runtime data.
+    - Prompt structure stays the same.
+    - Some values change dynamically.
+    - Useful for chatbots, Q&A systems, RAG pipelines.
+
+
+
+## PromptTemplate:
+- A PromptTemplate in langchain is a structured way to create prompts dynamically by inserting variables into a predefined template. Instead of hardcoding prompts, PromptTemplate allows you to define placeholders that can be filled in at runtime with different inputs.
+This makes it reusable, flexible and easy to manage, especially when working with dynamic user inputs or automated workflows.
+
+## ChatPromptTemplate
+- ChatPromptTemplate is a LangChain component used to structure prompts for chat-based LLMs by organizing messages with specific roles (system, human, AI). It enables multi-turn conversation management, allowing developers to define system instructions, user queries, and previous AI responses for context-aware interactions.
+
+
+# Why use PromptTemplate over f-strings
+- default validation
+- reusable
+- langchain ecosystem
+
+## Messages:
+- system
+- human
+- AI
+
+## Message Placeholder:
+- A MessagePlaceHolder in langchain is a special placeholder used inside a ChatPromptTemplate to dynamically insert chat history or list of messages at runtime.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Structured Output:
+- In LangChain, structured output refers to the practice of having language models return responses in a well-defined data format rather than free form text. This makes the model output easier to parse and work with programmatically.
+
+# why do we need structured output
+- Data Extraction
+- API building
+- Agents
+
+# ways to get structured output:
+- from LLMs which give by default structured output. (with_structured_output)
+- from LLMs which can't give structured output. (output parsers)
+
+# with_structured_output
+    - TypedDict
+    - Pydantic
+    - json_schema
+
+# TypedDict
+- TypedDict is a way to define a dictionary in python where you specify what keys and values should exist. it helps ensure that your dictionary follows a specific structure.
+- it tells python what keys are required and what types of values they should have.
+- it does not validate data at runtime.
+
+# Pydantic
+- Pydantic is a data validation and data parsing library for python. it ensures that the data you work with is correct, structured and type-safe.
+
+### When to use What?
+
+# TypedDict
+- only need type hints
+- don't need validation
+- trust on LLM to return correct data
+
+# Pydantic
+- need data validation
+- need default values if LLM misses fields
+- want automatic type conversion
+
+# json
+- don't want to import extra python libraries (Pydantic)
+- need validation but don't need python objects
+- want to define structure in a standard JSON format
+
+# with_structured_output method
+- json mode (claude, gemini)
+- function calling (OpenAI)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Output Parsers:
+- Output Parsers in langchain help convert raw LLM responses into structured formats like JSON, CSV, Pydantic models and more. They ensure consistency, validation and ease of use in applications.
+
+### Types of Output Parsers:
+- StrOutputParser
+- JSONOutputParser
+- StructuredOutputParser
+- PydanticOutputParser
+
+# StrOutputParser
+- The StrOutputParser is the simplest output parser in Langchain. It is used to parse the output of a Language Model (LLM) and return it as a plain string.
+
+# JSONOutputParser
+- JsonOutputParser() (from LangChain) is used to convert LLM output into structured JSON format instead of plain text.
+
+# StructuredOutputParser
+- StructuredOutputParser is an output parser in langchain that helps extract structured JSON data from LLM responses based on predefined field schemas.
+- it works by defining a list of fields (ResponseSchema) that the model should return, ensuring the output follows a structured format.
+
+
+# PydanticOutputParser
+- PydanticOutputParser is a structured output parser in langchain that uses Pydantic models to enforce schema validation when processing LLM responses.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Chains:
+- A chain in LangChain is a structured sequence of components—such as prompts, language models (LLMs), and output parsers—linked together to automate complex, multi-step workflows. It allows the output of one step to serve as the input for the next, facilitating tasks like data retrieval, transformation, and reasoning.
+
+# simple chain
+- A simple chain connects a single prompt template, an LLM, and an optional output parser. It is used for straightforward tasks where you send an input, the LLM processes it, and you get one output.
+
+# sequential chain
+- Sequential chains link multiple simple chains together in a linear fashion. The output of one step is automatically fed as input to the next, making it ideal for multi-stage tasks.
+
+# parallel chain
+- Parallel chains run multiple, independent chains at the same time to increase efficiency. This is useful when the same input needs to be processed in different ways concurrently, with the results combined later.
+
+# conditional chain
+- Conditional chains add logic ("if-then" scenarios) to decide which path the workflow should take. They dynamically route user inputs to the most appropriate specialized sub-chain based on the content of the request.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Runnables:
+- Runnables were introduced to standardize how different components of an AI pipeline interact.
+- Runnables are abstractions that represent any unit of work in an AI pipeline.
+    They:
+    - Take an input
+    - Process it
+    - Return an output
+
+Before runnables:
+- Every component (LLM, prompt, retriever, tool) had different interfaces
+- You had to manually glue everything together
+- Hard to debug, reuse, or scale workflows
+
+Runnables solve this by:
+- Providing a common interface (invoke, batch, stream)
+- Making components composable like building blocks
+- Allowing pipelines to be clean, reusable, and testable
+
+# Problems
+- Inconsistent interfaces
+- Complex pipelines
+- Hard to debug
+- No reusability
+- Poor Streaming & Async support
+ 
+# Benefits
+- Composability
+- Standardization
+- Reusability
+- Debugging & Observability
+- Streaming & Async Support
+
+### Types of Runnables:
+- Task Specific Runnables
+- Runnables Primitives
+
+# Task Specific Runnables:
+- These are core langchain components that have been converted into runnables so they can be used in pipeline.
+- purpose: perform task-specific operations like LLM calls, prompting, retrieval
+- ChatOpenAI(), PromptTemplate(), Retriever()
+
+# Runnables Primitives:
+- These are fundamental building blocks for structuring execution logic in AI workflows.
+- purpose: They help orchestrate execution by defining how different runnables interact
+- RunnableSequence(), RunnableParallel(), RunnableMap(), RunnableBranch(), RunnableLambda(), RunnablePassthrough()
+
+
+## Available Runnable Primitives:
+
+# RunnableSequence():
+- RunnableSequence is a sequential chain of runnables in langchain that executes each step one after another, passing the output of one step as the input to the next.
+- It is useful when you need to compose multiple runnables together in a structured workflow.
+
+# RunnableParallel():
+- RunnableParallel is a runnable primitives that allows multiple runnables to executes in parallel.
+- Each runnable receives the same input and processes it independently, producing a dictionary of outputs.
+
+# RunnablePassthrough():
+- RunnablePassthrough is a special Runnable primitive that simply returns the input as a output without modifying it.
+
+# RunnableLambda():
+- RunnableLambda is a runnable primitive that allows you to apply custom python functions within an AI pipeline.
+- It acts as a middleware between different AI components, enabling preprocessing, transformation, API calls, filtering and post-processing in langchain workflow.
+
+# RunnableBranch():
+- RunnableBranch is a control flow component in langchain that allows you to conditionally route input data to different chains or runnables based on custom logic.
+- it functions like an if/elif/else block for chains - where you define a set of condition functions, each associated with a runnable. The first matching condition is executed. if no condition matches, a default runnable is used.
+
+# LCEL (langchain expression language):
+- LangChain Expression Language (LCEL) is a declarative, composable language for creating complex AI chains in LangChain, using the pipe operator (|) to pass output from one component to the next. It simplifies building pipelines by providing automatic streaming, asynchronous support, parallel execution, and seamless integration with LangSmith for debugging. 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### RAG:
+- RAG is a technique that combine information retrieval with language generation, where model retrieves relevant documents from a knowledge base and then uses them as context to generate accurate and grounded response.
+
+# Benefits of using RAG:
+- use of up-to-date information
+- better privacy
+- no limit of document size
+
+# RAG Components:
+- Document loaders
+- Text splitters
+- Vector databases
+- Retrievers
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Document loaders:
+- Document loaders are component in langchain used to load data from various sources into a standardized format, which can be used for chunking, embedding, retrieval and generation.
+    
+# Types of Common Document Loaders:
+    - TextLoader
+    - PyPDFLoader
+    - WebBaseLoader
+    - CSVLoader
+
+# TextLoader:
+- TextLoader is a simple and commonly used document loader in langchain that reads plain text files and converts them into langchain document objects.
+- Ideal for loading chat logs, scraped text, transcripts, code snippets or any plain text data into langchain pipeline.
+- work only with .txt files.
+
+# PyPDFLoader:
+- PyPDFLoader is a document loader in langchain used to load content from PDF files and convert each page into a Document object.
+- It uses the PyPDF library under the hood - not great with scanned PDFs or complex layouts.
+
+# DirectoryLoader:
+- DirectoryLoader is a document loader that lets you load multiple documents from a directory or files.
+
+# WebBaseLoader:
+- WebBaseLoader is a document loader in langchain used to load and extract text content from web pages.
+
+# CSVLoader:
+- CSVLoader is a document loader used to load CSV files into langchain document objects.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Text Splitting:
+- Text Splitting is the process of breaking large chunks of text into smaller, manageable pieces that an LLM can handle effectively.
+
+### Why Text Splitting:
+
+# Overcoming model limitation:
+- Many embedding models and language models have maximum input size constraints. Splitting allows us to process documents that would otherwise exceed these limits.
+
+# Downstream tasks:
+- Text splitting improves nearly every LLM powered task.
+- Embedding : Short chunks yield more accurate vectors
+- Semantic Search : Search results point to focused info, not noise
+- Summarization : Prevents hallucination and topic drift
+
+# Optimizing computational resources:
+- Working with smaller chunks of text can be more memory-efficient and allow for better parallelization of processing tasks.
+
+### Types of Text Splitters:
+- Length based
+- Text structure based (paragraph, sentence, word, character)
+- Document structure based
+- Semantic Meaning based
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Vector Stores:
+
+# What are vector stores:
+- A vector store is a system designed to store and retrieve data represented as numerical vectors.
+
+# Key Features:
+
+- Storage: Ensures that vectors and their associated metadata are retained, whether in-memory for quick lookups or on-disk for durability and large scale use.
+
+- Similarity Search: Help retrieve the vectors most similar to a query vector.
+
+- Indexing: Provides a data structure or method that enables fast similarity searches on high-dimensional vectors. (e.g. approximate nearest neighbor lookups)
+
+- CRUD operation: Manage the lifecycle of data - adding new vectors, reading them, updating existing entries, removing outdated vectors.
+
+# Use-cases:
+- Semantic search
+- RAG
+- Recommender system
+- Image/Multimedia search
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

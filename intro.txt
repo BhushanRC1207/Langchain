@@ -478,9 +478,89 @@ Runnables solve this by:
 - Image/Multimedia search
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+### What are Retrievers:
+- A retriever is a component in LangChain that fetches relevant documents from a data source in response to a user query.
+- There are multiple types of retrievers.
+- All retrievers in LangChain are Runnables.
 
+# Types of Retrievers:
+- Retrievers based on Data Source
+- Retrievers based on Search Strategy
 
+# Wikipedia Retriever:
+- A Wikipedia Retriever is a retriever that queries the wikipedia API to fetch relevant content for a given query.
+
+# Vector Store Retriever:
+- A vector store retriever in langchain is the most common type of retriever that lets you search and fetch documents from a vector store based on semantic similarity using vector embeddings.
+
+# Maximal Marginal Relevance (MMR):
+- How can we pick results that are not only relevant to the query but also different from each other.
+- MMR is an information retrieval algorithm designed to reduce redundancy in the retrieved results while maintaining high relevance to the query.
+
+    - MMR Retriever avoids that by:
+        - picking the most relevant document first
+        - then picking the next most relevant and least similar to already selected docs 
+        - and so on...
+
+# Multi-Query Retriever:
+- Sometimes a single query might not capture all the ways information is phrased in your documents.
+    - How MQR:
+        - Takes original query.
+        - Uses an LLM to generate multiple semantically different versions of that query.
+        - Performs retrieval for each sub-query.
+        - Combines and de-duplicates the results.
+
+# Contextual Compression Retriever:
+- The Contextual Compression Retriever in langchain is an advanced retriever that improves retrieval quality by compressing documents after retrieval - keeping only the relevant content based on the user query.
+    - How CCR:
+        - Base retriever retrieves N documents.
+        - A compressor (usually an LLM) is applied to each document.
+        - The compressor keeps only the parts relevant to the query.
+        - Irrelevant content is discarded.
+
+    - When to use:
+        - Documents are long and contain mixed information.
+        - Want to reduce context length for LLMs.
+        - Need to improve answer accuracy in RAG pipelines.
+
+# More Retrievers:
+- BM25Retriever
+- ParentDocumentRetriever
+- SelfQueryRetriever
+- TimeWeightedVectorRetriever
+- MultiVectorRetriever
+- EnsembleRetriever
+- ArxicRetriever
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# What is RAG:
+
+    Query / Prompt --> LLM --> Response
+
+# When to use RAG
+- private data
+- recent data
+- hallucination
+
+# Fine-tuning
+- supervised fine-tuning (prompt --> desired output)
+- unsupervised fine-tuning / continued pretraining (transcript)
+- RLHF (reinforcement learning and human feedback)
+- LoRA
+- QLoRA
+
+## Supervised fine-tuning:
+- Collect data : A few hundred - few thousand carefully curated examples. 
+- Choose a method : Full parameter, LoRA, QLoRA or parameter-efficient adapters.
+- Train for a few epochs : Keep the base weights frozen or partially frozen and update only a small subset or all weights.
+- Evaluate & Safety-Test : Measures exact-match, factuality and hallucination against held-out data.
+
+### Note:
+- In-context learning is a core capability of LLM, where the model learns to solve a task purely by seeing examples in the prompt - without updating its weights.
+- An emergent property is a behaviour or ability that suddenly appears in a system when it reaches a certain scale or complexity - even though it was not explicitly programmed or expected from the individual components.
 
 
 

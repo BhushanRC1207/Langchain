@@ -1,0 +1,19 @@
+# Core AI and LLM Framework
+langchain
+langchain-community
+langchain-core
+langchain-huggingface
+langchain-text-splitters
+
+# Vector Database and Embeddings
+faiss-cpu
+sentence-transformers
+
+# API and Model Integration
+huggingface_hub
+python-dotenv
+
+# Data Processing and Tools
+youtube-transcript-api
+tqdm
+ipywidgets
